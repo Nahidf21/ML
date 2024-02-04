@@ -2,7 +2,7 @@ library(e1071) ## for Bayes classifier
 library(caret)
 
 delays.df <- read.csv("FlightDelays.csv")
-
+head(delays.df)
 # change variables to categorical first
 delays.df$DAY_WEEK <- as.factor(delays.df$DAY_WEEK)
 delays.df$Flight.Status<-as.factor(delays.df$Flight.Status)
@@ -19,6 +19,7 @@ valid.df <- delays.df[valid.index, selected.var]
 delays.nb <- naiveBayes(Flight.Status ~ ., data = train.df)
 
 ## predict probabilities
+
 pred.prob <- predict(delays.nb, newdata = valid.df, type = "raw")
 pred_valid.df<-cbind(valid.df,pred.prob)
 
